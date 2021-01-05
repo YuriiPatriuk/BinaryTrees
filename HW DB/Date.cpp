@@ -32,7 +32,7 @@ Date Date::addDay()
 
 Date::Date(const size_t& day, const size_t& month, const size_t& year)
 {
-	setDay(day);
-	setMonth(month);
 	setYear(year);
+	setMonth(month);
+	setDay(day);
 }

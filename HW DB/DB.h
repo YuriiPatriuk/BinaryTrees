@@ -1,29 +1,18 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include <ctime>
-#include <vector>
 #include "Date.h"
+#include "Violation.h"
 using namespace std;
 
 class DB
 {
 public:
-	void addCar(const double& data);
+	void addCar(const double& data, const Violation& vi);
 	bool empty() const;
 	bool findBool(const double& search);
-
+	void print() const;
 private:
 	struct Node
 	{
-	private:
-		class Violation
-		{
-		private:
-			string name;
-			Date date;
-			float sum;
-		};
 	public:
 		Node() = default;
 		Node(const double& data = 0, Node* left = nullptr, Node* right = nullptr, Node* parent = nullptr)
@@ -34,18 +23,17 @@ private:
 		Node* left, * right, * parent;
 	};
 	Node* root = nullptr;
-	void add(const double& data);
-	Node& find(const double& search);
+	void add(const double& data, const Violation& vi);
+	void change(const double& search, const Violation& vi);
+	void printHelper(/*BinaryTree<T>::*/Node* node) const;
 };
 
-inline void DB::addCar(const double& data)
+inline void DB::addCar(const double& data, const Violation& vi)
 {
-	if (!findBool(data))
-		add(data);
+	if (findBool(data)==false)
+		add(data,vi);
 	else
-	{
-
-	}
+		change(data, vi);
 }
 
 inline bool DB::findBool(const double& search)
@@ -70,9 +58,10 @@ inline bool DB::empty() const
 	return root == nullptr;
 }
 
-inline void DB::add(const double& data)
+inline void DB::add(const double& data, const Violation& vi)
 {
 	Node* addNode = new Node(data);
+	addNode->list.push_back(vi);
 	if (empty()) {
 		root = addNode;
 		return;
@@ -82,7 +71,7 @@ inline void DB::add(const double& data)
 	Node* temp = root;
 	while (!found)
 	{
-		if (data >= temp->key) // new node will be right
+		if (data > temp->key) // new node will be right
 		{
 			if (temp->right == nullptr) // free place
 			{
@@ -107,20 +96,48 @@ inline void DB::add(const double& data)
 	}
 }
 
-inline DB::Node& DB::find(const double& search)
+inline void DB::change(const double& search, const Violation& vi)
 {
-	Node r(0);
 	if (empty())
 		return;
 	Node* temp = root;
 	while (temp != nullptr)
 	{
 		if (temp->key == search)
-			return *temp;
+		{
+			temp->list.push_back(vi);
+			break;
+		}
 		else if (temp->key < search)
 			temp = temp->right;
 		else if (temp->key > search)
 			temp = temp->left;
 	}
-	return r;
+
+}
+
+inline void DB::print() const
+{
+	cout <<"-------------------------------"<< "\n\tDB: " << endl;
+	printHelper(root);
+	cout << "-------------------------------" << endl;
+}
+
+inline void DB::printHelper(Node* node) const
+{
+	if (node != nullptr)
+	{
+		int count = 0;
+		printHelper(node->left);
+		cout <<"Car:"<< node->key << endl;
+		for (auto& i : node->list)
+		{
+			++count;
+			cout << "#" << count << endl;
+			i.print();
+
+		}
+		cout << endl;
+		printHelper(node->right);
+	}
 }

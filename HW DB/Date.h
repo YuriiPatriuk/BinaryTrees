@@ -2,7 +2,7 @@
 #include<iostream>
 class Date
 {
-	static const size_t CURR_YEAR = 2020;
+	static const size_t CURR_YEAR = 2021;
 	bool isLeap(size_t year) {
 		return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
 	}
@@ -19,9 +19,9 @@ public:
 			month = month_;
 		}
 	}
-	void setYear(const size_t& year_)
+	void setYear(const size_t& year_) 
 	{
-		if (year_ >= CURR_YEAR - 18)
+		if (year_ <= CURR_YEAR)
 		{
 			year = year_;
 		}
@@ -62,7 +62,7 @@ public:
 			if (year < 0 || year > CURR_YEAR - 18) std::cout << "YEAR ERROR \n";*/
 		} while (true);
 	}
-	void print()
+	void print() const
 	{
 		std::cout << day << "." << month << "." << year << std::endl;
 	}
