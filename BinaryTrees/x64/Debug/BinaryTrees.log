@@ -1,4 +1,4 @@
 ﻿  BinaryTrees.cpp
-C:\Users\dev\Desktop\BinaryTrees\BinaryTrees\Tree.h(157): warning C4172: returning address of local variable or temporary
-C:\Users\dev\Desktop\BinaryTrees\BinaryTrees\Tree.h(142): warning C4172: returning address of local variable or temporary
-  BinaryTrees.vcxproj -> C:\Users\dev\Desktop\BinaryTrees\x64\Debug\BinaryTrees.exe
+C:\Users\Private_OLP\Desktop\BinaryTrees\BinaryTrees\Tree.h(142): warning C4172: returning address of local variable or temporary
+C:\Users\Private_OLP\Desktop\BinaryTrees\BinaryTrees\Tree.h(157): warning C4172: returning address of local variable or temporary
+  BinaryTrees.vcxproj -> C:\Users\Private_OLP\Desktop\BinaryTrees\x64\Debug\BinaryTrees.exe

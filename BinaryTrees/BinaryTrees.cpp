@@ -15,7 +15,7 @@ int main()
     size_t count = 5;
     for (size_t i = 0; i < count; i++)
     {
-        int data = rand() % 10;
+        int data = rand() % 100;
         cout << "Add node " << data << endl;
         tree.add(data);
     }
@@ -31,6 +31,7 @@ int main()
     cout <<"Find: "<< boolalpha << tree.find(5) << endl;
     cout <<"Find: "<< boolalpha << tree.find(1) << endl;
     //tree.printBigger(6);
+    tree.clear();
 
     return 0;
 }
